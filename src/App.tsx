@@ -8,6 +8,7 @@ import React from "react";
 import "./App.css";
 import "antd/dist/reset.css";
 import * as Antd from "antd";
+import DynamicComponent from "./components/DynamicComponent";
 
 // const { Button, Input, Select} = Antd
 const Button = Antd["Button"];
@@ -32,6 +33,12 @@ const components = [
         <Select.Option value="3">3</Select.Option>
       </>
     ),
+  },
+  {
+    id: 4,
+    type: "Select",
+    path: "MyComponentOne",
+    props: { author: "WindDancer", title: "这是标题", stared: 100 },
   },
 ];
 
@@ -59,11 +66,24 @@ function App() {
         return (
           <p key={component.id}>
             <AntdComponent {...component.props}>
-              {component.children && component.children}
+              {component.children}
             </AntdComponent>
           </p>
         );
       })}
+      {/* {components.map((component: any) => {
+        return (
+          <p key={component.id}>
+            <DynamicComponent 
+              componentPath="antd" 
+              componentName={component.type}
+              componentProps={component.props}
+            >
+              {component.children}
+            </DynamicComponent>
+          </p>
+        );
+      })} */}
     </div>
   );
 }
